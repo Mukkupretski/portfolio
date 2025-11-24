@@ -2,6 +2,8 @@
 
 :root {
   --green: #2BFF00;
+  --red: #FC3737;
+  --gray: rgba(145, 145, 145, 0.25);
   --pink: #FF61AD;
   --light: #FEDCCE;
   --bkg: rgba(0, 6, 32, 0.8);

@@ -84,10 +84,10 @@ const cmds: Command[] = [
     desc: "",
     secret: true,
     res: <>
-      <p>sudo -l</p>
-      <p>The user "Mikko" may run the following commands as sudo:</p>
+      <div>sudo -l</div>
+      <div>The user "Mikko" may run the following commands as sudo:</div>
       <p></p>
-      <p>h4ck</p>
+      <div>h4ck</div>
     </>
   },
   {
@@ -95,9 +95,9 @@ const cmds: Command[] = [
     desc: "",
     secret: true,
     res: <>
-      <p>Access granted</p>
+      <div>Access granted</div>
       <p></p>
-      <p>:)</p>
+      <div>:)</div>
     </>
   }
 ]
