@@ -65,17 +65,37 @@ function Cmdline({ terminal, addToContent, focus, setFocus }: { terminal: HTMLDi
 function Autocompletion({ v }: { v: string }) {
   const options = autocomplete(v)
   const [idx, setIdx] = useState<number>(0)
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      const n = options?.length ?? 1;
+      if (e.key == "ArrowDown") {
+        setIdx(i => (i + 1) % n)
+      } else if (e.key == "ArrowUp") {
+        setIdx(i => (i + n - 1) % n)
+      }
+    }
+    document.addEventListener("keydown", listener)
+    return () => {
+
+      document.removeEventListener("keydown", listener)
+    }
+  }, [setIdx, options])
+  useEffect(() => {
+    if (idx < (options?.length ?? 1)) return;
+    setIdx(0)
+  }, [options, setIdx])
   return <>
-    <div style={{ height: "1px", width: "100%", marginInline: "10px", backgroundColor: "var(--thin-border)", marginTop: "5px" }}></div>
+    <div style={{ marginBottom: "5px", height: "1px", width: "100%", marginInline: "10px", backgroundColor: "var(--thin-border)", marginTop: "5px" }}></div>
     {options ? <div>{
       options.map((opt, i) => {
         return <div style={{
+          height: "20px",
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "flex-start"
-        }}><div style={{ backgroundColor: i == idx ? "var(--red)" : "var(--gray)" }}></div>
-          <div style={{ background: i == idx ? "var(--gray)" : "none" }}>{opt}</div>
+        }}><div style={{ height: "100%", width: "6px", backgroundColor: i == idx ? "var(--red)" : "var(--gray)" }}></div>
+          <div style={{ paddingLeft: "3px", height: "100%", background: i == idx ? "var(--gray)" : "none" }}>{opt}</div>
         </div>
       })
     }
