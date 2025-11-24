@@ -1,0 +1,30 @@
+#terminal {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  top: 20px;
+  bottom: 20px;
+  background-color: var(--bkg);
+  border: 1px solid var(--black);
+  color: var(--white);
+  padding: 10px;
+}
+
+#cmdline {
+  outline: none;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 600;
+
+}
+
+#background {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  height: 100vh;
+  left: 0;
+  width: 100vw;
+}

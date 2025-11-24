@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root {
+  --green: #2BFF00;
+  --pink: #FF61AD;
+  --light: #FEDCCE;
+  --bkg: rgba(0, 6, 32, 0.8);
+  --white: #FFFFFF;
+  --thin-border: rgba(89, 89, 89, 0.6);
+  --black: #000000;
+  box-sizing: content-box;
+  font-family: "JetBrains Mono", monospace;
+  font-style: normal;
+  font-optical-sizing: auto;
+}
