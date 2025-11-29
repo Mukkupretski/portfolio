@@ -8,6 +8,7 @@
   border: 1px solid var(--black);
   color: var(--white);
   padding: 10px;
+  padding-bottom: 200px;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: var(--black);
@@ -59,4 +60,8 @@
   height: 100vh;
   left: 0;
   width: 100vw;
+}
+
+.trmlnk {
+  color: white;
 }

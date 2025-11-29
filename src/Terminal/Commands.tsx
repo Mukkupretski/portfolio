@@ -23,20 +23,40 @@ const projects: Project[] = [
     page: <></>
   }
 ]
+const TrmLnk = (props: { to: string, text: string }) => {
+  return <a target="_blank" rel="noopener noreferrer" className="trmlnk" href={props.to}>{props.text}</a>
+}
 
-const cmds: Command[] = [
+const contestResults = [
+  { pos: "7.", text: "Baltian tie -joukkuematematiikkakilpailu (kombinatoriikka, 15 p.)", link: "https://bw2025.lu.lv/competition/results/" },
+  { pos: "Finaalipaikka", text: "Kipinä-tiedekilpailu", link: "https://www.tek.fi/fi/tietoa-tekista/palkinnot-ja-kilpailut/kipina-2025/kipina-palkitut-2025" },
+  { pos: "23.", text: "Pohjoismainen matematiikkakilpailu 2025", link: "http://www.georgmohr.dk/nmcperm/res/2025.html" },
+  { pos: "3.", text: "Lukion matematiikkakilpailun finaali 2025", link: "https://maol.fi/app/uploads/2025/01/Lukion-matematiikka-finaali-tulokset-2025.pdf" },
+  { pos: "1.", text: "Lukion matematiikkakilpailun välisarja 2024", link: "https://maol.fi/app/uploads/2024/12/Matematiikka-valisarja-tulokset-2024.pdf" },
+  { pos: "1.", text: "Lukion kemiakilpailun perussarja 2024", link: "https://maol.fi/app/uploads/2024/12/Kemia-perussarja-tulokset-2024.pdf" },
+  { pos: "6.", text: "Lukion matematiikkakilpailun finaali 2024", link: "https://maol.fi/app/uploads/2024/01/Lukion-matematiikka-finaali-tulokset-2024.pdf" },
+  { pos: "2.", text: "Lukion matematiikkakilpailun perussarja 2023", link: "https://maol.fi/app/uploads/2023/12/Matematiikka-perussarja-tulokset-2023.pdf" },
+]
+
+
+
+let cmds: Command[] = [
   {
     name: "help",
     desc: "Näyttää listan saatavilla olevista komennoista",
     res: <>
-      test
     </>,
   },
   {
     name: "whoami",
     desc: "Kertoo, millä käyttäjätunnuksella nykyinen käyttäjä on kirjautunut sisään ja käyttäjän perustiedot",
     res: <>
-
+      <div>mikko_ylinen</div>
+      <div>uid=0(root) gid=0(root) groups=0(root),2(bin),5(tty),6(disk)</div>
+      <div>Ikä: 18 vuotta</div>
+      <div>Koulu: Helsingin matematiikkalukio</div>
+      <div>Kiinnostuksen kohteet: Matematiikka, koodaus</div>
+      <div>Muut harrastukset: Partio</div>
     </>
   },
   {
@@ -44,7 +64,7 @@ const cmds: Command[] = [
     desc: "Listaa nykyisen käyttäjän ohjelmointiprojektit. Komennolla 'ls -g' näet graafisen valikon",
     param: ["-g"],
     res: (param: string) => {
-
+      console.log(param)
       return <>
 
       </>
@@ -54,14 +74,20 @@ const cmds: Command[] = [
     name: "links",
     desc: "Listaa nykyiseen käyttäjään liittyviä verkkolinkkejä",
     res: <>
-
+      <TrmLnk text="Mukkupretski - GitHub" to="https://github.com/Mukkupretski"></TrmLnk>
+      <br></br>
+      <TrmLnk text="MukkuPretski - TryHackMe" to="https://tryhackme.com/p/MukkuPretski"></TrmLnk>
     </>
   },
   {
     name: "contests",
     desc: "Näyttää tuloksia tiedekilpailuista, joihin nykyinen käyttäjä on osallistunut",
     res: <>
-
+      <div style={{ "display": "grid", gridTemplateColumns: "200px 1fr", rowGap: "10px" }}>
+        {contestResults.map(r => {
+          return <><b>{r.pos}</b><TrmLnk text={r.text} to={r.link}></TrmLnk></>
+        })}
+      </div>
     </>
   },
   {
@@ -71,13 +97,6 @@ const cmds: Command[] = [
     res: (project: string) => {
       return <></>
     }
-  },
-  {
-    name: "education",
-    desc: "Näyttää nykyisen käyttäjän tähänastisen koulutuksen",
-    res: <>
-
-    </>
   },
   {
     name: "sudo",
@@ -102,6 +121,20 @@ const cmds: Command[] = [
   }
 ]
 
+
+const HelpBody = () => {
+  return <div style={{ "display": "grid", gridTemplateColumns: "100px 1fr", rowGap: "10px" }}>{cmds.map(cmd => {
+    if (cmd.secret) return <></>
+    return <><b>{cmd.name}</b><div>{cmd.desc}</div></>
+  })}</div>
+}
+
+// make help work
+cmds = cmds.map(cmd => {
+  if (cmd.name != "help") return cmd
+  return { ...cmd, res: <HelpBody></HelpBody> }
+})
+
 export function autocomplete(command: string): string[] | undefined {
   const spl = command.split(" ");
   // complete command
@@ -119,7 +152,7 @@ export function autocomplete(command: string): string[] | undefined {
 }
 
 const IncorrectSyntax = () => {
-  return <div>Virheellinen syntaksi</div>
+  return <div style={{ color: "red" }}>Virheellinen syntaksi</div>
 }
 
 export function GetRes(command: string): ReactNode {

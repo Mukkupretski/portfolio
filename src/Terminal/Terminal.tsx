@@ -33,6 +33,9 @@ function Cmdline({ terminal, addToContent, focus, setFocus }: { terminal: HTMLDi
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
       if (e.key != "Enter") return;
+      const autocompleteSuggest = autocomplete(cmd)
+      const cmdls = cmd.split(" ")
+      if (autocompleteSuggest && autocompleteSuggest[0] != cmdls[cmdls.length - 1]) return;
       CommandEnter(cmd, setCmd, addToContent, terminal)
     }
     document.addEventListener("keydown", listener)
@@ -59,11 +62,13 @@ function Cmdline({ terminal, addToContent, focus, setFocus }: { terminal: HTMLDi
       }, 0)
     }
   }
-  } id="cmdline" type="text" ref={inputRef}></input></div><Autocompletion v={cmd}></Autocompletion></div>
+  } id="cmdline" type="text" ref={inputRef}></input></div><Autocompletion v={cmd} setCmd={setCmd}></Autocompletion></div>
 }
 
-function Autocompletion({ v }: { v: string }) {
+function Autocompletion({ v, setCmd }: { v: string, setCmd: Dispatch<SetStateAction<string>> }) {
   const options = autocomplete(v)
+  const cmdlist = v.split(" ")
+  const cmdIsOpt = (options && (cmdlist[cmdlist.length - 1] == options[0]))
   const [idx, setIdx] = useState<number>(0)
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
@@ -72,6 +77,14 @@ function Autocompletion({ v }: { v: string }) {
         setIdx(i => (i + 1) % n)
       } else if (e.key == "ArrowUp") {
         setIdx(i => (i + n - 1) % n)
+      } else if (e.key == "Enter") {
+        setCmd((cmd: string) => {
+          const cmdls = cmd.split(" ")
+          return cmdls.map((token, i) => {
+            if (i != cmdls.length - 1 || !options) return token;
+            return options[idx]
+          }).join(" ")
+        })
       }
     }
     document.addEventListener("keydown", listener)
@@ -79,14 +92,16 @@ function Autocompletion({ v }: { v: string }) {
 
       document.removeEventListener("keydown", listener)
     }
-  }, [setIdx, options])
+  }, [idx, options])
   useEffect(() => {
     if (idx < (options?.length ?? 1)) return;
     setIdx(0)
   }, [options, setIdx])
   return <>
-    <div style={{ marginBottom: "5px", height: "1px", width: "100%", marginInline: "10px", backgroundColor: "var(--thin-border)", marginTop: "5px" }}></div>
-    {options ? <div>{
+    <div style={{ marginBottom: "5px", height: "1px", width: "100%", marginInline: "10px", backgroundColor: "var(--thin-border)", marginTop: "5px", }}></div>
+    <div style={{
+      height: "200px",
+    }}>{options ? <> {(cmdIsOpt) ? <></> : <div>{
       options.map((opt, i) => {
         return <div style={{
           height: "20px",
@@ -99,7 +114,10 @@ function Autocompletion({ v }: { v: string }) {
         </div>
       })
     }
-    </div> : <p style={{ color: "var(--red)" }}> Ei vastaavuuksia</p >}
+    </div>} </>
+      : <p style={{ color: "var(--red)" }}> Ei vastaavuuksia</p >
+      }
+    </div>
   </>
 }
 
