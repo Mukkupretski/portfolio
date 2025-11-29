@@ -2,15 +2,14 @@ import { useEffect, useRef, useState, type Dispatch, type ReactNode, type SetSta
 import "./Terminal.css"
 import { autocomplete, GetRes } from "./Commands";
 
-export default function Terminal() {
+export default function Terminal(props: { focus: boolean, setFocus: Dispatch<SetStateAction<boolean>> }) {
   const terminal = useRef<HTMLDivElement | null>(null)
   const [content, setContent] = useState<ReactNode[]>([]);
   const [canType, setCanType] = useState<boolean>(false)
-  const [focus, setFocus] = useState<boolean>(true)
   useEffect(() => {
     setContent([<InitTerminal setCanType={setCanType}></InitTerminal>])
   }, [])
-  return <div ref={terminal} id="terminal">{content}{canType ? <Cmdline terminal={terminal.current} focus={focus} setFocus={setFocus} addToContent={(v: ReactNode) => {
+  return <div ref={terminal} id="terminal">{content}{canType ? <Cmdline terminal={terminal.current} focus={props.focus} setFocus={props.setFocus} addToContent={(v: ReactNode) => {
     setContent(cnt => [...cnt, v])
   }}></Cmdline> : <></>}</div>
 }

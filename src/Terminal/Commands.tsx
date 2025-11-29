@@ -11,16 +11,22 @@ export type Command = {
 export type Project = {
   name: string;
   page: ReactNode;
+  thumbnail: string;
+  desc: string;
 }
 
 const projects: Project[] = [
   {
     name: "orgaaninenkemisti",
-    page: <></>
+    page: <></>,
+    thumbnail: "",
+    desc: ""
   },
   {
     name: "hiippari-reittihaku",
-    page: <></>
+    page: <></>,
+    thumbnail: "",
+    desc: ""
   }
 ]
 const TrmLnk = (props: { to: string, text: string }) => {
@@ -64,9 +70,11 @@ let cmds: Command[] = [
     desc: "Listaa nykyisen käyttäjän ohjelmointiprojektit. Komennolla 'ls -g' näet graafisen valikon",
     param: ["-g"],
     res: (param: string) => {
-      console.log(param)
-      return <>
+      if (param == "-g") {
 
+      }
+      return <>
+        {projects.map(p => <div>{p.name}/</div>)}
       </>
     }
   },
