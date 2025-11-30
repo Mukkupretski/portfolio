@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
+body {
+  background-color: black;
+}
+
 :root {
   --green: #2BFF00;
   --red: #FC3737;
   --gray: rgba(145, 145, 145, 0.25);
   --pink: #FF61AD;
   --light: #FEDCCE;
-  --bkg: rgba(0, 6, 32, 0.8);
+  --bkg: rgba(0, 6, 32, 0.95);
   --white: #FFFFFF;
   --thin-border: rgba(89, 89, 89, 0.6);
   --black: #000000;

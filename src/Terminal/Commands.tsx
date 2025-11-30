@@ -1,5 +1,12 @@
-import type { ReactNode } from "react";
+import { useContext, useEffect, type ReactNode } from "react";
+import Hiippari from "../Pages/Hiippari";
+import Kemisti from "../Pages/Kemisti";
+import { useDialog } from "../DialogContext";
+import Valinta from "../Pages/Valinta";
 
+const IncorrectSyntax = () => {
+  return <div style={{ color: "red" }}>Virheellinen syntaksi</div>
+}
 export type Command = {
   name: string;
   desc: string;
@@ -15,18 +22,18 @@ export type Project = {
   desc: string;
 }
 
-const projects: Project[] = [
+export let projects: Project[] = [
   {
     name: "orgaaninenkemisti",
-    page: <></>,
-    thumbnail: "",
-    desc: ""
+    page: <Kemisti></Kemisti>,
+    thumbnail: "kemisti2.png",
+    desc: "kun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktion"
   },
   {
     name: "hiippari-reittihaku",
-    page: <></>,
-    thumbnail: "",
-    desc: ""
+    page: <Hiippari></Hiippari>,
+    thumbnail: "hiippari1.png",
+    desc: "kun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktion"
   }
 ]
 const TrmLnk = (props: { to: string, text: string }) => {
@@ -45,6 +52,25 @@ const contestResults = [
 ]
 
 
+const ProjectRes = ({ projectName }: { projectName: string }) => {
+  const res = projects.find(p => p.name === projectName);
+  const { setValue } = useDialog();
+
+  useEffect(() => {
+    if (res) setValue(res.page);
+  }, [res, setValue]);
+
+  if (!res) return <IncorrectSyntax />;
+  return <div>{projectName} avattu</div>;
+};
+
+const LsGRes = () => {
+  const { setValue } = useDialog()
+  useEffect(() => {
+    setValue(<Valinta></Valinta>)
+  }, [])
+  return <div>Avataan visuaalinen valikko</div>
+}
 
 let cmds: Command[] = [
   {
@@ -71,7 +97,7 @@ let cmds: Command[] = [
     param: ["-g"],
     res: (param: string) => {
       if (param == "-g") {
-
+        return <LsGRes></LsGRes>
       }
       return <>
         {projects.map(p => <div>{p.name}/</div>)}
@@ -85,6 +111,8 @@ let cmds: Command[] = [
       <TrmLnk text="Mukkupretski - GitHub" to="https://github.com/Mukkupretski"></TrmLnk>
       <br></br>
       <TrmLnk text="MukkuPretski - TryHackMe" to="https://tryhackme.com/p/MukkuPretski"></TrmLnk>
+      <br></br>
+      <TrmLnk text="MukkuPretski - Leetcode" to="https://leetcode.com/u/mukkupretski/"></TrmLnk>
     </>
   },
   {
@@ -103,7 +131,7 @@ let cmds: Command[] = [
     desc: "Avaa nykyisen käyttäjän projektin. Käyttö: cd <projekti>. Näet vaihtoehdot komennolla ls",
     param: projects.map(p => p.name),
     res: (project: string) => {
-      return <></>
+      return <ProjectRes projectName={project}></ProjectRes>
     }
   },
   {
@@ -157,10 +185,6 @@ export function autocomplete(command: string): string[] | undefined {
     res = currCmd.param.filter(p => p.startsWith(spl[1]))
   }
   return (res.length == 0 ? undefined : res)
-}
-
-const IncorrectSyntax = () => {
-  return <div style={{ color: "red" }}>Virheellinen syntaksi</div>
 }
 
 export function GetRes(command: string): ReactNode {

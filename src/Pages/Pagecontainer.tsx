@@ -1,3 +1,4 @@
+import "./Pages.css"
 import { useEffect, type ReactNode } from "react";
 
 export default function Pagecontainer(props: { page: ReactNode, ref: React.RefObject<HTMLDialogElement | null>, setFocus: (val: boolean) => void }) {
@@ -22,9 +23,10 @@ export default function Pagecontainer(props: { page: ReactNode, ref: React.RefOb
     height: "80vh",
     padding: "0",
     border: "1px solid var(--thin-border)",
-    background: "none"
+    background: "none",
+    color: "white"
   }}>{props.page}<div style={{
-    position: "absolute",
+    position: "fixed",
     bottom: "15px",
     left: "15px",
     color: "white"
