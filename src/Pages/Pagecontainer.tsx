@@ -1,23 +1,31 @@
+import { useDialog } from "../DialogContext";
 import "./Pages.css"
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
-export default function Pagecontainer(props: { page: ReactNode, ref: React.RefObject<HTMLDialogElement | null>, setFocus: (val: boolean) => void }) {
+export default function Pagecontainer(props: { setFocus: (val: boolean) => void }) {
+  const ref = useRef<HTMLDialogElement | null>(null)
+  const { value, setValue } = useDialog()
+  useEffect(() => {
+    if (!value) return;
+    ref.current?.showModal()
+  }, [value])
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
       if (e.key != "q") return;
-      props.ref.current?.close()
+      ref.current?.close()
     }
     const focusListener = () => {
       props.setFocus(true)
+      setValue(null)
     }
-    props.ref.current?.addEventListener("close", focusListener)
+    ref.current?.addEventListener("close", focusListener)
     document.addEventListener("keydown", listener)
     return () => {
       document.removeEventListener("keydown", listener)
-      props.ref.current?.removeEventListener("close", focusListener)
+      ref.current?.removeEventListener("close", focusListener)
     }
   }, [])
-  return <dialog ref={props.ref} style={{
+  return <dialog ref={ref} style={{
     position: "fixed",
     width: "80vw",
     height: "80vh",
@@ -25,7 +33,7 @@ export default function Pagecontainer(props: { page: ReactNode, ref: React.RefOb
     border: "1px solid var(--thin-border)",
     background: "none",
     color: "white"
-  }}>{props.page}<div style={{
+  }}>{value}<div style={{
     position: "fixed",
     bottom: "15px",
     left: "15px",

@@ -1,22 +1,31 @@
-import { useEffect, useRef, useState, } from "react"
+import { useEffect, useState, } from "react"
 import Background from "./Background"
 import Terminal from "./Terminal/Terminal"
 import Pagecontainer from "./Pages/Pagecontainer"
-import { useDialog } from "./DialogContext"
+import BootScreen from "./BootScreen"
+
+const loadtimeSeconds = 3
 
 function App() {
-  const { value } = useDialog()
-  const dialogRef = useRef<HTMLDialogElement | null>(null)
   const [focus, setFocus] = useState<boolean>(true)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
-    if (!value) return;
-    dialogRef.current?.showModal()
-  }, [value])
+    const timeout = setTimeout(() => {
+      setLoading(false)
+    }, loadtimeSeconds * 1000)
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [])
   return (
     <>
-      <Background></Background>
-      <Terminal setFocus={setFocus} focus={focus}></Terminal>
-      <Pagecontainer setFocus={setFocus} ref={dialogRef} page={value}></Pagecontainer>
+      {loading ? <BootScreen></BootScreen> :
+        <>
+          <Background></Background>
+          <Terminal setFocus={setFocus} focus={focus}></Terminal>
+          <Pagecontainer setFocus={setFocus}></Pagecontainer>
+        </>
+      }
     </>
   )
 }

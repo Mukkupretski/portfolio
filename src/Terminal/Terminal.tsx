@@ -124,7 +124,6 @@ const initSequence = ["Ladataan järjestelmää", "Ladataan ohjelmia", "Käänne
 
 // TODO: WASTE THEIR TIME AND MAKE THEM WAIT BY COMMENTING THE EARLY RETURN STATEMENT
 function sleep(s: number) {
-  return;
   return new Promise(resolve => setTimeout(resolve, 1000 * s));
 }
 

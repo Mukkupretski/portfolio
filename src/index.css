@@ -2,6 +2,8 @@
 
 body {
   background-color: black;
+  padding: 0;
+  margin: 0;
 }
 
 :root {
@@ -18,4 +20,19 @@ body {
   font-family: "JetBrains Mono", monospace;
   font-style: normal;
   font-optical-sizing: auto;
+}
+
+.rotate {
+  display: inline-block;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
