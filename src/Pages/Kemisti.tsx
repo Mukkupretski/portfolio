@@ -1,6 +1,6 @@
 const drivelink = "https://drive.google.com/drive/folders/1kDK6CQtRUltX4RvqrzM-sTBxWqAA0Ezy?usp=sharing"
-const paragraph1 = "aaaaaa444444444444444444444444444444444444 4444444444444cheekycheekycheekycheekycheekycheekychee kycheekycheekycheekycheekycheekycheekyche ekycheekycheekycheekycheekycheekycheeky"
-const paragraph2 = "aaaaaa444444444444444444444444444444444444 4444444444444cheekycheekycheekycheekycheekycheekychee kycheekycheekycheekycheekycheekycheekyche ekycheekycheekycheekycheekycheekycheeky"
+const paragraph1 = "Orgaaninen kemia on lukiolaisen näkökulmasta sekavaa eikä noudata juurikaan säännönmukaisuuksia. Kemian opettajamme pelotteli meitä usein yliopiston orgaanisen kemian sisällöllä, joka on vielä haastavampaa. Kun kerran orgaaninen kemia on näin sekavaa, täytyy ainakin joidenkin orgaanisten kemistien olla lähes hullun tiedemiehen kaltaisia! Näin syntyi idea pelistä, jossa Orgaaninen Kemisti heittelee laboratorioonsa eksyviä heksaanihapolla."
+const paragraph2 = "Peli oli heittämällä laajin koulumme peliohjelmointikurssilla tehty projekti ja kunnianhimoinen puolentoista kuukauden mittaiselle kurssille, kun muidenkin koulutöiden kanssa oli kiireitä. Saimme sen kuitenkin porukalla ajoissa valmiiksi. Opiskelin Unity-ohjelmointia varsin nopeatempoisesti ja jouduin moneen otteeseen uudelleenkirjoittamaan alussa kirjoittamaani koodia. Lopulta kehitys alkoi sujua joutuisammin ja lisäsin suuria ominaisuuksia vain muutamassa päivässä."
 
 export default function Kemisti() {
   return <div style={{

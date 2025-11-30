@@ -1,7 +1,7 @@
 const app = "https://hiippari-app.web.app"
 const github = "https://github.com/Mukkupretski/hiippari-app"
-const paragraph1 = "aaaaaa444444444444444444444444444444444444 4444444444444cheekycheekycheekycheekycheekycheekychee kycheekycheekycheekycheekycheekycheekyche ekycheekycheekycheekycheekycheekycheeky"
-const paragraph2 = "aaaaaa444444444444444444444444444444444444 4444444444444cheekycheekycheekycheekycheekycheekychee kycheekycheekycheekycheekycheekycheekyche ekycheekycheekycheekycheekycheekycheeky"
+const paragraph1 = "Hiipivä Haamu eli 'Hiippari' on päivän mittainen Helsingin partiolaisille suunnattu salapoliisi- ja kaupunkituntemuskilpailu. Kilpailun rastit ovat ympäri kaupunkia ja nopea eteneminen on tärkeää. Vuonna 2024 yksi rastiradan keskeisistä rasteista Töölössä jäi vierailematta, koska aika loppui kesken. Valitin tästä usein ja pitkään, ja niinpä minua kehotettiin ensi kerralla suunnittelemaan reitti. Tästä keksin itselleni hyvän koodausprojektin."
+const paragraph2 = "Hiipivä Haamu järjestetään aina marraskuun ensimmäisenä sunnuntaina. Aioin aloittaa projektin työstön jo elokuussa, mutta koska vielä ei ollut kiire, se ei juuri edennyt eikä lokakuun alussa ollut vielä juuri mitään kasassa. Tässä vaiheessa aloin keskittyä projektiin, mutta silti tuli kiire. Lopulta kisapäivänä tärkeitä ominaisuuksia kuten oman sijainnin valitseminen puuttui eikä sovelluksesta ollut hyötyä. Opin silti paljon ja olen tyytyväinen, mitä sain jo aikaan. Projekti on hyvin lähellä valmista ja mitä luultavimmin ensi kerralla käytössä."
 
 export default function Hiippari() {
   return <div style={{

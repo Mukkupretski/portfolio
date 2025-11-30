@@ -27,13 +27,13 @@ export let projects: Project[] = [
     name: "orgaaninenkemisti",
     page: <Kemisti></Kemisti>,
     thumbnail: "kemisti2.png",
-    desc: "kun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktion"
+    desc: "Kaveriporukkani kanssa kehittämä kauhu- ja kemiapeli, jossa tulee paeta kemistin laboratoriosta. Olin projektissa vastuussa erityisesti ohjelmoinnista."
   },
   {
     name: "hiippari-reittihaku",
     page: <Hiippari></Hiippari>,
     thumbnail: "hiippari1.png",
-    desc: "kun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktionkun integroit sä funktion"
+    desc: "HSL-apia hyödyntävä reittihakusovellus Salapoliisi- ja partiokilpailuun “Hiipivä Haamu”"
   }
 ]
 const TrmLnk = (props: { to: string, text: string }) => {
