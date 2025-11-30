@@ -1,4 +1,4 @@
-import { useContext, useEffect, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import Hiippari from "../Pages/Hiippari";
 import Kemisti from "../Pages/Kemisti";
 import { useDialog } from "../DialogContext";

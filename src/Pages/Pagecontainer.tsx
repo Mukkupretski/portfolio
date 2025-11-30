@@ -1,6 +1,6 @@
 import { useDialog } from "../DialogContext";
 import "./Pages.css"
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Pagecontainer(props: { setFocus: (val: boolean) => void }) {
   const ref = useRef<HTMLDialogElement | null>(null)

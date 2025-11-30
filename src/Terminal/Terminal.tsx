@@ -9,7 +9,7 @@ export default function Terminal(props: { focus: boolean, setFocus: Dispatch<Set
   useEffect(() => {
     setContent([<InitTerminal setCanType={setCanType}></InitTerminal>])
   }, [])
-  return <div ref={terminal} id="terminal">{content}{canType ? <Cmdline terminal={terminal.current} focus={props.focus} setFocus={props.setFocus} addToContent={(v: ReactNode) => {
+  return <div ref={terminal} id="terminal">{content}{canType ? <Cmdline terminal={terminal.current} focus={props.focus} addToContent={(v: ReactNode) => {
     setContent(cnt => [...cnt, v])
   }}></Cmdline> : <></>}</div>
 }
@@ -26,7 +26,7 @@ function CommandEnter(cmd: string, setCmd: (v: string) => void, addToContent: (n
   }, 0)
 }
 
-function Cmdline({ terminal, addToContent, focus, setFocus }: { terminal: HTMLDivElement | null, setFocus: Dispatch<SetStateAction<boolean>>, focus: boolean, addToContent: (node: ReactNode) => void }) {
+function Cmdline({ terminal, addToContent, focus }: { terminal: HTMLDivElement | null, focus: boolean, addToContent: (node: ReactNode) => void }) {
   const [cmd, setCmd] = useState<string>("");
   const inputRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
@@ -122,7 +122,6 @@ function Autocompletion({ v, setCmd }: { v: string, setCmd: Dispatch<SetStateAct
 
 const initSequence = ["Ladataan järjestelmää", "Ladataan ohjelmia", "Käännetään matriiseja", "Silitetään pingviinejä", "Käytetään Arch Linuxia"]
 
-// TODO: WASTE THEIR TIME AND MAKE THEM WAIT BY COMMENTING THE EARLY RETURN STATEMENT
 function sleep(s: number) {
   return new Promise(resolve => setTimeout(resolve, 1000 * s));
 }
